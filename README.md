@@ -13,7 +13,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_inapp_notifications: ^0.0.1
+  flutter_inapp_notifications: ^0.0.2
 ```
 
 
@@ -105,11 +105,6 @@ InAppNotifications.instance
   ..customAnimation = MyCustomAnimation()
   ..animationStyle = InAppNotificationsAnimationStyle.custom;
 ```
-
-## Upcoming
-
-- [] Add custom animations
-- [] Add custom duration for animations
 
 ## Changelog
 
