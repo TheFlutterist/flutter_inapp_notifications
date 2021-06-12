@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'inapp_notification_animation.dart';
 
+/// Offset [InAppNotificationAnimation] makes the In-App notification show up
+/// from the outside-top of the screen, and hides going outside-top of the screen again.
 class OffsetAnimation extends InAppNotificationAnimation {
   @override
   Widget buildWidget(

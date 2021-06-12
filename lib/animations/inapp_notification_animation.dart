@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Abstract animation wrapper used to build new Animations set to show In-App notifications
 abstract class InAppNotificationAnimation {
   InAppNotificationAnimation();
 

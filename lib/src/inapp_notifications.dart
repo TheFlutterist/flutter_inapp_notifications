@@ -2,16 +2,29 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_notifications/animations/inapp_notification_animation.dart';
+import 'package:flutter_inapp_notifications/animations/offset_animation.dart';
+import 'package:flutter_inapp_notifications/animations/opacity_animation.dart';
+import 'package:flutter_inapp_notifications/animations/scale_animation.dart';
 
 import 'inapp_notifications_container.dart';
 import 'inapp_notifications_overlay.dart';
 import 'inapp_notifications_overlay_entry.dart';
 
+/// Status for In-App Notification callbacks.
+///
+/// [show] when the status is currently showing.
+/// [dismiss] when the status is dismissed.
 enum InAppNotificationsStatus {
   show,
   dismiss,
 }
 
+/// Animation style used to show/hide In-App notification.
+///
+/// [opacity] uses [OpacityAnimation]
+/// [offset] uses [OffsetAnimation]
+/// [scale] uses [ScaleAnimation]
+/// [custom] uses a custom [InAppNotificationAnimation] set to customAnimation value
 enum InAppNotificationsAnimationStyle {
   opacity,
   offset,
@@ -48,25 +61,27 @@ class InAppNotifications {
 
   GlobalKey<InAppNotificationsContainerState>? get key => _key;
 
-  /// titleFontSize, default 14.0.
+  /// Title font size, default: 14.0.
   late double titleFontSize;
 
-  /// descriptionFontSize, default 14.0.
+  /// Description font size, default: 14.0.
   late double descriptionFontSize;
 
-  // backgroundColor, default Colors.white
+  /// Background color, default: [Colors.white]
   late Color backgroundColor;
 
-  // textColor, default Colors.black
+  /// Text color, default: [Colors.black]
   late Color textColor;
 
-  // shadow, default true
+  /// Set if notification should show shadow, default: true
   late bool shadow;
 
-  /// animationStyle, default [InAppNotificationsAnimationStyle.offset].
+  /// Animation style, default: [InAppNotificationsAnimationStyle.offset].
   late InAppNotificationsAnimationStyle animationStyle;
 
-  /// custom animation, default null.
+  /// Custom animation, default: null.
+  ///
+  /// Set a custom animation only when [animationStyle] is [InAppNotificationsAnimationStyle.custom]
   late InAppNotificationAnimation? customAnimation;
 
   static TransitionBuilder init({
@@ -81,7 +96,15 @@ class InAppNotifications {
     };
   }
 
-  /// show loading with [status] [indicator] [maskType]
+  /// Shows the In-App notification.
+  ///
+  /// [title] Title of the notification
+  /// [description] Description of the notification
+  /// [leading] Widget show leading the content
+  /// [ending] Widget show ending the content
+  /// [onTap] Function to be called when gesture onTap is detected
+  /// [duration] Duration which the notification will be shown
+  /// [persistent] Persistent mode will keep the notification visible until dismissed
   static Future<void> show(
       {String? title,
       String? description,
@@ -114,21 +137,21 @@ class InAppNotifications {
         duration: duration ?? Duration(seconds: 5));
   }
 
-  /// add loading status callback
+  /// Add status callback
   static void addStatusCallback(InAppNotificationsStatusCallback callback) {
     if (!_instance._statusCallbacks.contains(callback)) {
       _instance._statusCallbacks.add(callback);
     }
   }
 
-  /// remove single loading status callback
+  /// Remove single status callback
   static void removeCallback(InAppNotificationsStatusCallback callback) {
     if (_instance._statusCallbacks.contains(callback)) {
       _instance._statusCallbacks.remove(callback);
     }
   }
 
-  /// remove all loading status callback
+  /// Remove all status callback
   static void removeAllCallbacks() {
     _instance._statusCallbacks.clear();
   }
