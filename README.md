@@ -13,7 +13,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_inapp_notifications: ^0.0.2
+  flutter_inapp_notifications: ^0.0.3
 ```
 
 
