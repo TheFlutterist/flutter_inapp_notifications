@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_inapp_notifications/animations/offset_animation.dart';
-import 'package:flutter_inapp_notifications/theme.dart';
 
 import '../flutter_inapp_notifications.dart';
+import '../theme.dart';
 
 class InAppNotificationsContainer extends StatefulWidget {
   final Widget? leading;
@@ -114,7 +113,7 @@ class InAppNotificationsContainerState
           AnimatedBuilder(
             animation: _animationController,
             builder: (BuildContext context, Widget? child) {
-              return OffsetAnimation().buildWidget(
+              return InAppNotificationsTheme.showAnimation.buildWidget(
                 _Notification(
                   title: _title,
                   description: _description,

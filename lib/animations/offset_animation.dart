@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'inapp_notification_animation.dart';
 
 class OffsetAnimation extends InAppNotificationAnimation {
-  OffsetAnimation();
-
   @override
   Widget buildWidget(
     Widget child,

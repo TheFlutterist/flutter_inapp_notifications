@@ -92,7 +92,18 @@ InAppNotifications.instance
   ..descriptionFontSize = 14.0
   ..textColor = Colors.black
   ..backgroundColor = Colors.white
-  ..shadow = true;
+  ..shadow = true
+  ..animationStyle = InAppNotificationsAnimationStyle.scale;
+
+// Custom animation
+InAppNotifications.instance
+  ..titleFontSize = 14.0
+  ..descriptionFontSize = 14.0
+  ..textColor = Colors.black
+  ..backgroundColor = Colors.white
+  ..shadow = true
+  ..customAnimation = MyCustomAnimation()
+  ..animationStyle = InAppNotificationsAnimationStyle.custom;
 ```
 
 ## Upcoming

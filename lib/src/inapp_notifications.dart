@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_notifications/animations/inapp_notification_animation.dart';
 
 import 'inapp_notifications_container.dart';
 import 'inapp_notifications_overlay.dart';
@@ -9,6 +10,13 @@ import 'inapp_notifications_overlay_entry.dart';
 enum InAppNotificationsStatus {
   show,
   dismiss,
+}
+
+enum InAppNotificationsAnimationStyle {
+  opacity,
+  offset,
+  scale,
+  custom,
 }
 
 typedef InAppNotificationsStatusCallback = void Function(
@@ -25,6 +33,7 @@ class InAppNotifications {
     textColor = Colors.black;
     backgroundColor = Colors.white;
     shadow = true;
+    animationStyle = InAppNotificationsAnimationStyle.offset;
   }
 
   final List<InAppNotificationsStatusCallback> _statusCallbacks =
@@ -54,6 +63,12 @@ class InAppNotifications {
   // shadow, default true
   late bool shadow;
 
+  /// animationStyle, default [InAppNotificationsAnimationStyle.offset].
+  late InAppNotificationsAnimationStyle animationStyle;
+
+  /// custom animation, default null.
+  late InAppNotificationAnimation? customAnimation;
+
   static TransitionBuilder init({
     TransitionBuilder? builder,
   }) {
@@ -73,7 +88,8 @@ class InAppNotifications {
       Widget? leading,
       Widget? ending,
       VoidCallback? onTap,
-      Duration? duration}) {
+      Duration? duration,
+      bool persistent = false}) {
     Widget? _leading = leading != null
         ? Container(
             height: 50,
@@ -94,6 +110,7 @@ class InAppNotifications {
         leading: _leading,
         ending: _ending,
         onTap: onTap,
+        persistent: persistent,
         duration: duration ?? Duration(seconds: 5));
   }
 
@@ -123,11 +140,19 @@ class InAppNotifications {
     String? description,
     VoidCallback? onTap,
     Duration? duration,
+    bool persistent = false,
   }) async {
     assert(
       overlayEntry != null,
-      'You should call InAppNotifications.init() in your MaterialApp',
+      'you should call InAppNotifications.init() in your MaterialApp',
     );
+
+    if (animationStyle == InAppNotificationsAnimationStyle.custom) {
+      assert(
+        customAnimation != null,
+        'while animationStyle is custom, customAnimation should not be null',
+      );
+    }
 
     bool animation = leading == null;
     if (_key != null) await dismiss(animation: false);
@@ -148,7 +173,7 @@ class InAppNotifications {
     completer.future.whenComplete(() {
       _callback(InAppNotificationsStatus.show);
 
-      if (duration != null) {
+      if (duration != null && !persistent) {
         _cancelTimer();
         _timer = Timer(duration, () async {
           print("called dismiss");
