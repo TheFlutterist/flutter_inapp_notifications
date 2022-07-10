@@ -1,3 +1,8 @@
+## [0.0.4] - 2022.07.10
+* Added linter.
+* Improved code quality.
+* Got rid of all warnings.
+
 ## [0.0.3] - 2021.06.12
 * Improve documentation
 
