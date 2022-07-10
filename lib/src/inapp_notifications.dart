@@ -113,28 +113,24 @@ class InAppNotifications {
       VoidCallback? onTap,
       Duration? duration,
       bool persistent = false}) {
-    Widget? _leading = leading != null
-        ? Container(
-            height: 50,
-            child: leading,
-          )
-        : null;
-
-    Widget? _ending = ending != null
-        ? Container(
-            height: 50,
-            child: ending,
-          )
-        : null;
-
     return _instance._show(
         title: title,
         description: description,
-        leading: _leading,
-        ending: _ending,
+        leading: leading != null
+            ? SizedBox(
+                height: 50,
+                child: leading,
+              )
+            : null,
+        ending: ending != null
+            ? SizedBox(
+                height: 50,
+                child: ending,
+              )
+            : null,
         onTap: onTap,
         persistent: persistent,
-        duration: duration ?? Duration(seconds: 5));
+        duration: duration ?? const Duration(seconds: 5));
   }
 
   /// Add status callback
@@ -198,10 +194,7 @@ class InAppNotifications {
 
       if (duration != null && !persistent) {
         _cancelTimer();
-        _timer = Timer(duration, () async {
-          print("called dismiss");
-          await dismiss();
-        });
+        _timer = Timer(duration, dismiss);
       }
     });
     _markNeedsBuild();

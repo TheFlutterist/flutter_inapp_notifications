@@ -26,22 +26,23 @@ class InAppNotificationsTheme {
 
   /// [InAppNotificationAnimation] used to show In-App Notification based on set animationStyle to [InAppNotifications] instance
   static InAppNotificationAnimation get showAnimation {
-    InAppNotificationAnimation _animation;
+    InAppNotificationAnimation animation;
 
     switch (InAppNotifications.instance.animationStyle) {
       case InAppNotificationsAnimationStyle.custom:
-        _animation = InAppNotifications.instance.customAnimation!;
+        animation = InAppNotifications.instance.customAnimation!;
         break;
       case InAppNotificationsAnimationStyle.scale:
-        _animation = ScaleAnimation();
+        animation = ScaleAnimation();
         break;
       case InAppNotificationsAnimationStyle.opacity:
-        _animation = OpacityAnimation();
+        animation = OpacityAnimation();
         break;
       default:
-        _animation = OffsetAnimation();
+        animation = OffsetAnimation();
         break;
     }
-    return _animation;
+
+    return animation;
   }
 }

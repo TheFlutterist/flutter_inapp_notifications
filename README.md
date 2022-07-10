@@ -1,4 +1,5 @@
 # Flutter In-App Notifications
+
 A simple Flutter package to generate instant in-app notifications.
 
 ![license](https://img.shields.io/github/license/pintalubaf/flutter_inapp_notifications?style=flat)
@@ -7,15 +8,12 @@ A simple Flutter package to generate instant in-app notifications.
 
 ## Installing
 
-<em>The publishing to pub.dev is still processing, once it is successfully published, you just need to:</em>
-
 Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_inapp_notifications: ^0.0.3
+  flutter_inapp_notifications: ^0.0.4
 ```
-
 
 ## Import
 
@@ -82,10 +80,13 @@ InAppNotifications.removeCallback(statusCallback);
 
 InAppNotifications.removeAllCallbacks();
 ```
+
 ## Customize
+
 Customization is pretty straighforward, I'm actually working on more attributes to customize. Feel free to request new customizations.
 
 Customize it anywhere:
+
 ```dart
 InAppNotifications.instance
   ..titleFontSize = 14.0
@@ -115,5 +116,6 @@ InAppNotifications.instance
 [MIT License](./LICENSE)
 
 ## This was possible thanks to
+
 [easy_loading](https://github.com/kokohuang/flutter_easyloading) ❤️
 <em>This package was an inspiration, as well as a great reference to create this kind of packages.</em>

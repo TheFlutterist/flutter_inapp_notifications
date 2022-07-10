@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class InAppNotificationsOverlayEntry extends OverlayEntry {
-  final WidgetBuilder builder;
-
   InAppNotificationsOverlayEntry({
-    required this.builder,
+    required builder,
   }) : super(builder: builder);
 
   @override
   void markNeedsBuild() {
-    if (SchedulerBinding.instance?.schedulerPhase ==
+    if (SchedulerBinding.instance.schedulerPhase ==
         SchedulerPhase.persistentCallbacks) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         super.markNeedsBuild();
       });
     } else {

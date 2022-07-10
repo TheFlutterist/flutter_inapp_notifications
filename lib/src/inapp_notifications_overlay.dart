@@ -11,11 +11,11 @@ class InAppNotificationsOverlay extends StatefulWidget {
         super(key: key);
 
   @override
-  _InAppNotificationsOverlayState createState() =>
-      _InAppNotificationsOverlayState();
+  InAppNotificationsOverlayState createState() =>
+      InAppNotificationsOverlayState();
 }
 
-class _InAppNotificationsOverlayState extends State<InAppNotificationsOverlay> {
+class InAppNotificationsOverlayState extends State<InAppNotificationsOverlay> {
   late InAppNotificationsOverlayEntry _overlayEntry;
 
   @override

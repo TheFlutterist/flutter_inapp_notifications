@@ -5,7 +5,7 @@ class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
 _resetStyle() {
@@ -18,12 +18,12 @@ _resetStyle() {
     ..animationStyle = InAppNotificationsAnimationStyle.scale;
 }
 
-class _MainScreenState extends State<MainScreen> {
+class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter In-App Notifications'),
+        title: const Text('Flutter In-App Notifications'),
       ),
       body: Container(
         padding: const EdgeInsets.only(top: 50.0),
@@ -38,12 +38,10 @@ class _MainScreenState extends State<MainScreen> {
                     title: 'Welcome to InAppNotifications',
                     description:
                         'This is a very simple notification without any leading or ending widgets.',
-                    onTap: () {
-                      print('Tapped on: Simple Notification');
-                    },
+                    onTap: () {},
                     persistent: true);
               },
-              child: Text("Show Simple Notification"),
+              child: const Text("Show Simple Notification"),
             ),
             TextButton(
               onPressed: () {
@@ -51,17 +49,15 @@ class _MainScreenState extends State<MainScreen> {
 
                 InAppNotifications.show(
                     title: 'Welcome to InAppNotifications',
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.fact_check,
                       size: 50,
                     ),
                     description:
                         'This is a very simple notification with leading widget.',
-                    onTap: () {
-                      print('Tapped on: Notification with Leading widget');
-                    });
+                    onTap: () {});
               },
-              child: Text("Show Notification with Leading widget"),
+              child: const Text("Show Notification with Leading widget"),
             ),
             TextButton(
               onPressed: () {
@@ -69,20 +65,18 @@ class _MainScreenState extends State<MainScreen> {
 
                 InAppNotifications.show(
                   title: 'Welcome to InAppNotifications',
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.fact_check,
                     size: 50,
                   ),
-                  ending: Icon(Icons.arrow_right_alt),
+                  ending: const Icon(Icons.arrow_right_alt),
                   description:
                       'This is a very simple notification with leading and ending widget.',
-                  onTap: () {
-                    print(
-                        'Tapped on: Notification with Leading and Ending widget');
-                  },
+                  onTap: () {},
                 );
               },
-              child: Text("Show Notification with Leading and Ending widget"),
+              child: const Text(
+                  "Show Notification with Leading and Ending widget"),
             ),
             TextButton(
               onPressed: () {
@@ -92,29 +86,27 @@ class _MainScreenState extends State<MainScreen> {
 
                 InAppNotifications.show(
                   title: 'Welcome to InAppNotifications',
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.fact_check,
                     color: Colors.green,
                     size: 50,
                   ),
-                  ending: Icon(
+                  ending: const Icon(
                     Icons.arrow_right_alt,
                     color: Colors.red,
                   ),
                   description:
                       'This is a very simple notification with leading widget.',
                   onTap: () {
-                    print('Tapped on: Customized Notification');
-
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => const MainScreen(),
                       ),
                     );
                   },
                 );
               },
-              child: Text("Show Customized Notification"),
+              child: const Text("Show Customized Notification"),
             ),
           ],
         ),

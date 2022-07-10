@@ -1,6 +1,6 @@
 name: flutter_inapp_notifications
 description: A simple Flutter package to generate instant in-app notifications.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/pintalubaf/flutter_inapp_notifications
 
 environment:
@@ -14,6 +14,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

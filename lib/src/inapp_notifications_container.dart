@@ -39,7 +39,7 @@ class InAppNotificationsContainerState
   late AnimationController _animationController;
 
   bool get isPersistentCallbacks =>
-      SchedulerBinding.instance?.schedulerPhase ==
+      SchedulerBinding.instance.schedulerPhase ==
       SchedulerPhase.persistentCallbacks;
 
   @override
@@ -52,7 +52,7 @@ class InAppNotificationsContainerState
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
     )..addStatusListener((status) {
         bool isCompleted = widget.completer?.isCompleted ?? false;
         if (status == AnimationStatus.completed && !isCompleted) {
@@ -71,8 +71,8 @@ class InAppNotificationsContainerState
 
   Future<void> show(bool animation) {
     if (isPersistentCallbacks) {
-      Completer<void> completer = Completer<void>();
-      SchedulerBinding.instance?.addPostFrameCallback((_) => completer
+      Completer<TickerFuture> completer = Completer<TickerFuture>();
+      SchedulerBinding.instance.addPostFrameCallback((_) => completer
           .complete(_animationController.forward(from: animation ? 0 : 1)));
       return completer.future;
     } else {
@@ -82,8 +82,8 @@ class InAppNotificationsContainerState
 
   Future<void> dismiss(bool animation) {
     if (isPersistentCallbacks) {
-      Completer<void> completer = Completer<void>();
-      SchedulerBinding.instance?.addPostFrameCallback((_) => completer
+      Completer<TickerFuture> completer = Completer<TickerFuture>();
+      SchedulerBinding.instance.addPostFrameCallback((_) => completer
           .complete(_animationController.reverse(from: animation ? 1 : 0)));
       return completer.future;
     } else {
@@ -103,7 +103,7 @@ class InAppNotificationsContainerState
             builder: (BuildContext context, Widget? child) {
               return Opacity(
                 opacity: _animationController.value,
-                child: Container(
+                child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,
                 ),
@@ -153,7 +153,9 @@ class _Notification extends StatelessWidget {
           color: InAppNotificationsTheme.backgroundColor,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: InAppNotificationsTheme.shadow
-              ? [BoxShadow(blurRadius: 10.0, color: Colors.black26)]
+              ? const [
+                  BoxShadow(blurRadius: 10.0, color: Colors.black26),
+                ]
               : null),
       padding: const EdgeInsets.all(8.0),
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
